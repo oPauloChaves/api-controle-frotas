@@ -41,7 +41,7 @@ VehicleSchema.path('placa').index({
  *
  * @return Promise
  */
-VehicleSchema.statics.findByPlaca = (placa) => {
+VehicleSchema.statics.findByPlaca = function (placa) {
   return this.findOne({ placa }).exec()
 }
 
@@ -50,7 +50,7 @@ VehicleSchema.statics.findByPlaca = (placa) => {
  *
  * @return Promise
  */
-VehicleSchema.statics.list = ({ skip = 0, limit = 5 } = {}) => {
+VehicleSchema.statics.list = function ({ skip = 0, limit = 5 } = {}) {
   return this.find({})
     .sort({ createdAt: -1 })
     .skip(skip)

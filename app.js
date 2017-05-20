@@ -9,17 +9,21 @@ const cors = require('cors')
 const expressValidator = require('express-validator')
 const mongoose = require('mongoose')
 
+const isDev = process.env.NODE_ENV === 'development'
+
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
-dotenv.load()
+if (isDev) {
+  dotenv.load()
+}
 
 /**
  * Create Express server.
  */
 const app = express()
 
-if (process.env.NODE_ENV === 'development') {
+if (isDev) {
   app.use(logger('dev'))
 }
 
@@ -27,10 +31,7 @@ if (process.env.NODE_ENV === 'development') {
  * Connect to MongoDB.
  */
 mongoose.Promise = global.Promise
-let mongoUri = process.env.MONGODB_URI || process.env.MONGOLAB_URI
-if (process.env.NODE_ENV === 'development') {
-  mongoUri += '_dev'
-}
+let mongoUri = process.env.MONGOLAB_URI || process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/controle_frotas'
 mongoose.connect(mongoUri, {
   server: { socketOptions: { keepAlive: 1 } }
 })
@@ -62,7 +63,7 @@ app.use(function (req, res, next) {
 
 // development error handler
 // will print stacktrace
-if (process.env.NODE_ENV === 'development') {
+if (isDev) {
   app.use(function (err, req, res, next) {
     res.status(err.status || 500)
     res.json({

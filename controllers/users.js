@@ -1,5 +1,4 @@
 const User = require('../models/user')
-const Project = require('../models/project')
 const { jwtSign } = require('../utils/utils')
 
 function get (req, res) {
@@ -23,13 +22,6 @@ function save (req, res, next) {
 
       return user.save()
         .then(user => {
-          // Create a default project for this new user
-          new Project({
-            name: 'Sample Project',
-            description: 'Enjoy Reskongoal Project Management',
-            ownerId: user._id
-          }).save()
-
           return res.json({
             token: jwtSign(user),
             email: user.email

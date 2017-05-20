@@ -1,5 +1,5 @@
-# Reskongoal Project
-REST API for Reskongoal Project Management Web App
+# Controle Frotas Project
+REST API for Controle Frotas Web App
 
 ## Quick start
 

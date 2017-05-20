@@ -1,7 +1,5 @@
-const COLORS = ['white', 'black', 'orange', 'blue', 'green', 'yellow', 'purple', 'red', 'pink']
-const ROLES = ['ADMIN', 'DEV', 'CLIENT']
+const COMBUSTIVEIS = ['Gasolina', 'Álcool', 'Flex']
 
 module.exports = {
-  COLORS,
-  ROLES
+  COMBUSTIVEIS
 }

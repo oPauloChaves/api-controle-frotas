@@ -1,4 +1,4 @@
-const COMBUSTIVEIS = ['Gasolina', 'Álcool', 'Flex']
+const COMBUSTIVEIS = ['Gasolina', 'Alcool', 'Flex']
 
 module.exports = {
   COMBUSTIVEIS

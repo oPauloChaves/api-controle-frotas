@@ -55,7 +55,10 @@ async function findAll (req, res, next) {
   const { limit = 5, skip = 0 } = req.query
   try {
     const vehicles = await Vehicle.list({ limit, skip })
-    return res.json(vehicles)
+    return res.json({
+      items: vehicles,
+      total_count: vehicles.length
+    })
   } catch (err) {
     return next(err)
   }

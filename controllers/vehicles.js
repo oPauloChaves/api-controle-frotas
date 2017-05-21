@@ -16,7 +16,7 @@ async function save (req, res, next) {
   // create object explicitly to avoid any unwanted field
   const vehicle = new Vehicle({
     placa: req.body.placa,
-    imagem: req.body.image,
+    imagem: req.body.imagem,
     marca: req.body.marca,
     modelo: req.body.modelo,
     combustivel: req.body.combustivel,

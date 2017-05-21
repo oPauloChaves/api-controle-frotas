@@ -52,12 +52,18 @@ async function findById (req, res, next) {
  * Get vehicles list
  */
 async function findAll (req, res, next) {
-  const { limit = 5, skip = 0 } = req.query
+  let { limit = 5, /* skip = 0, */ page = 1 } = req.query
   try {
-    const vehicles = await Vehicle.list({ limit, skip })
+    if (limit < 0) limit = 5
+    if (page < 1) page = 1
+
+    const skip = (page - 1) * limit
+    const items = await Vehicle.list({ limit, skip })
+    const total = await Vehicle.count({}).exec()
+
     return res.json({
-      items: vehicles,
-      total_count: vehicles.length
+      items,
+      total_count: total
     })
   } catch (err) {
     return next(err)

@@ -31,7 +31,7 @@ if (isDev) {
  * Connect to MongoDB.
  */
 mongoose.Promise = global.Promise
-let mongoUri = process.env.MONGOLAB_URI || process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/controle_frotas'
+let mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/controle_frotas'
 mongoose.connect(mongoUri, {
   server: { socketOptions: { keepAlive: 1 } }
 })

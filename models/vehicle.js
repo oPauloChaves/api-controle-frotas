@@ -52,7 +52,7 @@ VehicleSchema.statics.findByPlaca = function (placa) {
  */
 VehicleSchema.statics.list = function ({ skip = 0, limit = 5 } = {}) {
   return this.find({})
-    .sort({ createdAt: -1 })
+    .sort({ createdAt: 1 })
     .skip(skip)
     .limit(limit)
     .exec()

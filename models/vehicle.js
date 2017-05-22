@@ -32,6 +32,8 @@ const VehicleSchema = new Schema({
   timestamps: true
 })
 
+VehicleSchema.path('marca').index()
+VehicleSchema.path('modelo').index()
 VehicleSchema.path('placa').index({
   unique: true
 })
@@ -50,8 +52,8 @@ VehicleSchema.statics.findByPlaca = function (placa) {
  *
  * @return Promise
  */
-VehicleSchema.statics.list = function ({ skip = 0, limit = 5 } = {}) {
-  return this.find({})
+VehicleSchema.statics.list = function ({ skip = 0, limit = 5, query = {} } = {}) {
+  return this.find(query)
     .sort({ createdAt: 1 })
     .skip(skip)
     .limit(limit)

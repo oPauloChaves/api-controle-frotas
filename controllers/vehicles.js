@@ -52,14 +52,25 @@ async function findById (req, res, next) {
  * Get vehicles list
  */
 async function findAll (req, res, next) {
-  let { limit = 5, /* skip = 0, */ page = 1 } = req.query
+  let { limit = 5, page = 1, q } = req.query
   try {
     if (limit < 0) limit = 5
     if (page < 1) page = 1
 
+    let query = {}
+    if (q) {
+      query = {
+        '$or': [
+          { placa: { '$regex': q, '$options': 'i' } },
+          { marca: { '$regex': q, '$options': 'i' } },
+          { modelo: { '$regex': q, '$options': 'i' } }
+        ]
+      }
+    }
+
     const skip = (page - 1) * limit
-    const items = await Vehicle.list({ limit, skip })
-    const total = await Vehicle.count({}).exec()
+    const items = await Vehicle.list({ limit, skip, query })
+    const total = await Vehicle.count(query).exec()
 
     return res.json({
       items,
